@@ -6,7 +6,9 @@ Function Stubs:
 **GUI Functions**
 '''
 
-#This function will call a dialogue box in our GUI which 
+#This function will call the file explorer on the user's machine and allows them to select 
+#the image they want colorized. The file path will then be displayed within the GUI along with
+#an icon version of the selected image
 def browse_file():
 
 '''
