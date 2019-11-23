@@ -11,7 +11,7 @@ global img
 def browsefunc():
     filename = filedialog.askopenfilename()
     pathlabel.config(text=filename)
-    canvas = Canvas(root, width = 300, height = 300)
+    canvas = Canvas(root)
     canvas.pack()
     img = ImageTk.PhotoImage(file = filename)
     canvas.create_image(20, 20, anchor=NW, image = img)
