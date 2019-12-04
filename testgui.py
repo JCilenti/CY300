@@ -19,6 +19,9 @@ def browsefunc():
 browsebutton = Button(root, text="Browse", command=browsefunc)
 browsebutton.pack()
 
+startbutton = Button(root, text="Start Process")
+startbutton.pack()
+
 pathlabel = Label(root)
 pathlabel.pack()
 
