@@ -7,7 +7,7 @@ root.title("Welcome to Our Colorization Tool")
 root.geometry("500x500")
 root.configure(background='light blue')
 
-global img
+
 def browsefunc():
     filename = filedialog.askopenfilename()
     pathlabel.config(text=filename)
@@ -23,5 +23,4 @@ pathlabel = Label(root)
 pathlabel.pack()
 
 #mainloop()
-
 root.mainloop()
