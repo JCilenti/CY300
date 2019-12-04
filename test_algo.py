@@ -28,3 +28,4 @@ model = tf.keras.models.Sequential([
 
 # Finish model
 model.compile(optimizer='rmsprop', loss='mse')
+model.summary()
