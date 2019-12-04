@@ -17,13 +17,22 @@ Xtrain = 1.0/255*Xtrain
 
 # We now begin designing our neural network
 model = tf.keras.models.Sequential([
-    tf.keras.layers.Conv2D(64, (3,3), activation='relu', input_shape=(28, 28, 1)),
-    tf.keras.layers.MaxPooling2D(2, 2),
-    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
-    tf.keras.layers.MaxPooling2D(2,2),
-    tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(128, activation='relu'),
-    tf.keras.layers.Dense(10, activation='softmax')
+    tf.keras.layers.InputLayer(input_shape=(256, 256, 1)),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu',padding='same'),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu', padding='same', strides=2),
+    tf.keras.layers.Conv2D(128, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.Conv2D(128, (3, 3), activation='relu', padding='same', strides=2),
+    tf.keras.layers.Conv2D(256, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.Conv2D(256, (3, 3), activation='relu', padding='same', strides=2),
+    tf.keras.layers.Conv2D(512, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.Conv2D(256, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.Conv2D(128, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.UpSampling2D(2, 2),
+    tf.keras.layers.Conv2D(64, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.UpSampling2D(2, 2),
+    tf.keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same'),
+    tf.keras.layers.Conv2D(2, (3, 3), activation='tanh', padding='same'),
+    tf.keras.layers.UpSampling2D(2, 2)
 ])
 
 # Finish model
