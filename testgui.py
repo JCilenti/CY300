@@ -15,6 +15,7 @@ def browsefunc():
     canvas.pack()
     img = ImageTk.PhotoImage(file = filename)
     canvas.create_image(20, 20, anchor=NW, image = img)
+    # look for a .draw function
 
 browsebutton = Button(root, text="Browse", command=browsefunc)
 browsebutton.pack()
