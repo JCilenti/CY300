@@ -3,6 +3,7 @@ import tensorflow as tf
 from tensorflow import keras
 from PIL import Image
 import numpy as np
+import os, sys
 
 img = Image.open("01dZiW.jpg") # import our image
 img = np.array(img, dtype=float)
