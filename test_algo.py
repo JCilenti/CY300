@@ -2,9 +2,27 @@
 import tensorflow as tf
 from tensorflow import keras
 from PIL import Image
-import numpy as np
-import os, sys
+from numpy import asarray
+from os import listdir
+from matplotlib import image
 
+# Get images from directory
+loaded_images = list()
+for filename in listdir('Train/'):
+    # load an image
+    img_vals = image.imread('Train/' + filename)
+    print(img_vals)
+    # store the loaded image data 
+    loaded_images.append(img_vals)
+    print('> loaded %s %s' % (filename, img_vals.shape))
+
+
+
+
+
+
+
+'''
 img = Image.open("01dZiW.jpg") # import our image
 img = np.array(img, dtype=float)
 # turn the saturation values of our images into an array
@@ -31,3 +49,4 @@ model = tf.keras.models.Sequential([
 model.compile(optimizer='rmsprop', loss='mse')
 model.summary()
 model.get_weights()
+'''
