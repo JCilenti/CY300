@@ -12,9 +12,9 @@ def browsefunc():
     filename = filedialog.askopenfilename()
     pathlabel.config(text=filename)
     canvas = Canvas(root)
-    canvas.pack()
     img = ImageTk.PhotoImage(file = filename)
     canvas.create_image(20, 20, anchor=NW, image = img)
+    canvas.pack()
     # look for a .draw function
 
 browsebutton = Button(root, text="Browse", command=browsefunc)
