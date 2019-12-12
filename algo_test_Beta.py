@@ -1,14 +1,21 @@
 import tensorflow as tf
 from tensorflow import keras
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
+from keras.preprocessing.image import array_to_img
+from keras.preprocessing.image import ImageDataGenerator
+from keras.callbacks import TensorBoard
+from skimage import data, io, filters, color
 from PIL import Image
 import numpy as np
 import os, sys
 
 # Get images
 X = []
-for filename in os.listdir('../Train/'):
-    X.append(img_to_array(load_img('../Train/'+filename)))
+for filename in os.listdir('Train/'):
+    X.append(img_to_array(load_img('Train/'+filename)))
 X = np.array(X, dtype=float)
+
 
 # Set up training and test data
 split = int(0.95*len(X))
@@ -16,25 +23,25 @@ Xtrain = X[:split]
 Xtrain = 1.0/255*Xtrain
 
 #Design the neural network
-model = Sequential()
-model.add(InputLayer(input_shape=(256, 256, 1)))
-model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-model.add(Conv2D(64, (3, 3), activation='relu', padding='same', strides=2))
-model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-model.add(Conv2D(128, (3, 3), activation='relu', padding='same', strides=2))
-model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-model.add(Conv2D(256, (3, 3), activation='relu', padding='same', strides=2))
-model.add(Conv2D(512, (3, 3), activation='relu', padding='same'))
-model.add(Conv2D(256, (3, 3), activation='relu', padding='same'))
-model.add(Conv2D(128, (3, 3), activation='relu', padding='same'))
-model.add(UpSampling2D((2, 2)))
-model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
-model.add(UpSampling2D((2, 2)))
-model.add(Conv2D(32, (3, 3), activation='relu', padding='same'))
-model.add(Conv2D(2, (3, 3), activation='tanh', padding='same'))
-model.add(UpSampling2D((2, 2)))
+model = tf.keras.models.Sequential()
+tf.keras.layers.InputLayer(input_shape=(256, 256, 1))
+tf.keras.layers.Conv2D(64, (3, 3), activation='relu', padding='same')
+tf.keras.layers.Conv2D(64, (3, 3), activation='relu', padding='same', strides=2)
+tf.keras.layers.Conv2D(128, (3, 3), activation='relu', padding='same')
+tf.keras.layers.Conv2D(128, (3, 3), activation='relu', padding='same', strides=2)
+tf.keras.layers.Conv2D(256, (3, 3), activation='relu', padding='same')
+tf.keras.layers.Conv2D(256, (3, 3), activation='relu', padding='same', strides=2)
+tf.keras.layers.Conv2D(512, (3, 3), activation='relu', padding='same')
+tf.keras.layers.Conv2D(256, (3, 3), activation='relu', padding='same')
+tf.keras.layers.Conv2D(128, (3, 3), activation='relu', padding='same')
+tf.keras.layers.UpSampling2D((2, 2))
+tf.keras.layers.Conv2D(64, (3, 3), activation='relu', padding='same')
+tf.keras.layers.UpSampling2D((2, 2))
+tf.keras.layers.Conv2D(32, (3, 3), activation='relu', padding='same')
+tf.keras.layers.Conv2D(2, (3, 3), activation='tanh', padding='same')
+tf.keras.layers.UpSampling2D((2, 2))
 
-# Finish model
+# Compile the results of our model
 model.compile(optimizer='rmsprop', loss='mse')
 
 # Image transformer
@@ -48,7 +55,7 @@ datagen = ImageDataGenerator(
 batch_size = 50
 def image_a_b_gen(batch_size):
     for batch in datagen.flow(Xtrain, batch_size=batch_size):
-        lab_batch = rgb2lab(batch)
+        lab_batch = color.rgb2lab(batch)
         X_batch = lab_batch[:,:,:,0]
         Y_batch = lab_batch[:,:,:,1:] / 128
         yield (X_batch.reshape(X_batch.shape+(1,)), Y_batch)
@@ -56,6 +63,7 @@ def image_a_b_gen(batch_size):
 # Train model
 TensorBoard(log_dir='/output')
 model.fit_generator(image_a_b_gen(batch_size), steps_per_epoch=10000, epochs=1)
+'''
 # Test images
 Xtest = rgb2lab(1.0/255*X[split:])[:,:,:,0]
 Xtest = Xtest.reshape(Xtest.shape+(1,))
@@ -81,3 +89,4 @@ for i in range(len(output)):
         cur[:,:,0] = color_me[i][:,:,0]
         cur[:,:,1:] = output[i]
         imsave("result/img_"+str(i)+".png", lab2rgb(cur))
+'''

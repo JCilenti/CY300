@@ -7,8 +7,6 @@ window.configure(background='light blue')
 window.title("Welcome to Our Colorization Tool")
 window.geometry("500x500")
 
-
-
 def browsefunc():
     filename = filedialog.askopenfilename()
     pathlabel.config(text=filename)
