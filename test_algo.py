@@ -6,30 +6,26 @@ from numpy import asarray
 from os import listdir
 from matplotlib import image
 
+
 # Get images from directory
-loaded_images = list()
+X = list()
 for filename in listdir('Train/'):
     # load an image
     img_vals = image.imread('Train/' + filename)
-    print(img_vals)
+    #print(img_vals)
     # store the loaded image data 
-    loaded_images.append(img_vals)
-    print('> loaded %s %s' % (filename, img_vals.shape))
+    X.append(img_vals)
+print(X)
 
 
-
-
-
-
+#img = Image.open("01dZiW.jpg") # import our image
+#img = np.array(img, dtype=float)
+#turn the saturation values of our images into an array
 
 '''
-img = Image.open("01dZiW.jpg") # import our image
-img = np.array(img, dtype=float)
-# turn the saturation values of our images into an array
-
 # Set up training and test data
-split = int(0.80*len(img)) # Use 80% of data to train model
-Xtrain = img[:split]
+split = int(0.80*len(X)) # Use 80% of data to train model
+Xtrain = X[:split]
 Xtrain = 1.0/255*Xtrain
 
 # We now begin designing our neural network
