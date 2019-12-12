@@ -1,5 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
+from keras.models import Sequential
+from keras.layers import Dense, Activation
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import array_to_img
@@ -62,11 +64,11 @@ def image_a_b_gen(batch_size):
         X_batch = lab_batch[:,:,:,0]
         Y_batch = lab_batch[:,:,:,1:] / 128
         yield (X_batch.reshape(X_batch.shape+(1,)), Y_batch)
-'''
+
 # Train model
 TensorBoard(log_dir='/output')
 model.fit_generator(image_a_b_gen(batch_size), steps_per_epoch=10000, epochs=1)
-'''
+
 # Test images
 Xtest = sk.color.rgb2lab(1.0/255*X[split:])[:,:,:,0]
 Xtest = Xtest.reshape(Xtest.shape+(1,))

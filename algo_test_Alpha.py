@@ -1,3 +1,4 @@
+
 # Here we get the images first
 image = img_to_array(load_img('some image name'))
 image = np.array(image, dtype=float)
