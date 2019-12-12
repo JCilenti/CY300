@@ -3,16 +3,20 @@ from PIL import ImageTk,Image
 from tkinter import filedialog
       
 window = Tk() 
+window.geometry("400x300")
 menu = Menu(window) 
 
 def browsefunc():
     filename = filedialog.askopenfilename()
+    print(filename)
     pathlabel.config(text=filename)
-    #canvas = Canvas(width=300, height=200, bg='light blue')
+    canvas = Canvas(width=300, height=200)
     load = Image.open(filename) 
+    print(load)
     img = ImageTk.PhotoImage(file = filename)
-    #canvas.create_image(20, 20, anchor=NW, image = img)
-    #canvas.pack()
+    print(img)
+    canvas.create_image(20, 20, anchor=NW, image = img)
+    canvas.pack()
 
 pathlabel = Label(window)
 pathlabel.pack()

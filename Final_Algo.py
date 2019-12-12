@@ -5,7 +5,10 @@ from keras.preprocessing.image import img_to_array
 from keras.preprocessing.image import array_to_img
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import TensorBoard
+import skimage as sk
 from skimage import data, io, filters, color
+#from scipy.misc import *
+import matplotlib.pyplot as plt
 from PIL import Image
 import numpy as np
 import os, sys
@@ -59,24 +62,24 @@ def image_a_b_gen(batch_size):
         X_batch = lab_batch[:,:,:,0]
         Y_batch = lab_batch[:,:,:,1:] / 128
         yield (X_batch.reshape(X_batch.shape+(1,)), Y_batch)
-
+'''
 # Train model
 TensorBoard(log_dir='/output')
 model.fit_generator(image_a_b_gen(batch_size), steps_per_epoch=10000, epochs=1)
 '''
 # Test images
-Xtest = rgb2lab(1.0/255*X[split:])[:,:,:,0]
+Xtest = sk.color.rgb2lab(1.0/255*X[split:])[:,:,:,0]
 Xtest = Xtest.reshape(Xtest.shape+(1,))
-Ytest = rgb2lab(1.0/255*X[split:])[:,:,:,1:]
+Ytest = sk.color.rgb2lab(1.0/255*X[split:])[:,:,:,1:]
 Ytest = Ytest / 128
 print(model.evaluate(Xtest, Ytest, batch_size=batch_size))
 
 # Load black and white images
 color_me = []
-for filename in os.listdir('../Test/'):
-        color_me.append(img_to_array(load_img('../Test/'+filename)))
+for filename in os.listdir('Test/'):
+        color_me.append(img_to_array(load_img('Test/'+filename)))
 color_me = np.array(color_me, dtype=float)
-color_me = rgb2lab(1.0/255*color_me)[:,:,:,0]
+color_me = sk.color.rgb2lab(1.0/255*color_me)[:,:,:,0]
 color_me = color_me.reshape(color_me.shape+(1,))
 
 # Test model
@@ -88,5 +91,4 @@ for i in range(len(output)):
         cur = np.zeros((256, 256, 3))
         cur[:,:,0] = color_me[i][:,:,0]
         cur[:,:,1:] = output[i]
-        imsave("result/img_"+str(i)+".png", lab2rgb(cur))
-'''
+        plt.imsave("Results/"+str(i)+".jpg", sk.color.lab2rgb(cur))
