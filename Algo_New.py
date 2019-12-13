@@ -22,6 +22,7 @@ split = int(0.95*len(X))
 Xtrain = X[:split]
 Xtrain = 1.0/255*Xtrain
 
+
 model = Sequential()
 model.add(InputLayer(input_shape=(256, 256, 1)))
 model.add(Conv2D(64, (3, 3), activation='relu', padding='same'))
@@ -92,3 +93,4 @@ for i in range(len(output)):
     cur[:,:,0] = color_me[i][:,:,0]
     cur[:,:,1:] = output[i]
     imsave("Result/img_"+str(i)+".png", lab2rgb(cur))
+'''
