@@ -1,0 +1,26 @@
+The following sources were used while creating this project: 
+
+https://keras.io/ # General info about the Keras Frontend
+https://www.tensorflow.org/guide/keras/overview              |
+https://www.tensorflow.org/tutorials/quickstart/beginner     |____ # These sources were used for learning about the Tensorflow backend
+https://www.tensorflow.org/overview/                         |
+https://www.tensorflow.org/install                           |
+https://www.geeksforgeeks.org/python-gui-tkinter/                     |
+https://opensource.com/resources/python/gui-frameworks                |______ # How to create the tkinter python GUI
+https://www.tutorialspoint.com/python/python_gui_programming.htm      |
+https://blog.floydhub.com/colorizing-and-restoring-old-images-with-deep-learning/ # A similar Porject that we referenced for Layer models
+https://keras.io/getting-started/sequential-model-guide/      |
+https://keras.io/layers/convolutional/                        |_____ # More on the sequential model and how it works
+https://keras.io/models/about-keras-models/                   |
+https://keras.io/optimizers/                                  |
+https://www.python-course.eu/tkinter_canvas.php # General tkinter info
+https://stackoverflow.com/questions/33369832/read-multiple-images-on-a-folder-in-opencv-python/43049639                                 |
+https://machinelearningmastery.com/how-to-load-and-manipulate-images-for-deep-learning-in-python-with-pil-pillow/                       |
+https://stackoverflow.com/questions/44595234/how-to-display-an-image-in-a-canvas-object-in-tkinter-using-the-path-obtained-fr?rq=1      |_____ # Image manipulation with pillow
+https://machinelearningmastery.com/how-to-load-convert-and-save-images-with-the-keras-api/                                              |
+https://stackoverflow.com/questions/37504857/convert-rgb-triplets-to-lab-triplets-using-skimage-color-rgb2lab                           |
+https://scikit-image.org/docs/dev/api/skimage.color.html#skimage.color.rgb2lab                                                          |
+https://www.codementor.io/blog/tensorboard-integration-5fh168wqvi # Using tensorboard to display results
+https://keras.io/preprocessing/image/  # More image processing
+https://keras.io/getting-started/faq/ # General Keras FAQs
+https://machinelearningmastery.com/save-load-keras-deep-learning-models/ # How to save and load our model for future use
